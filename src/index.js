@@ -1,33 +1,62 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import uuidv4 from 'uuid'
 
-const App = props => {
-  const [count, setCount] = useState(props.count)
-  const [text, setText] = useState('')
+const NoteApp = () => {
+  const [notes, setNotes] = useState([])
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
 
-  const increment = () => setCount(count + 1)
+  function addNote(e) {
+    e.preventDefault()
+    setNotes([
+      ...notes,
+      {
+        title,
+        content,
+        id: uuidv4()
+      }
+    ])
+    setTitle('')
+    setContent('')
+  }
 
-  const decrement = () => setCount(count - 1)
-
-  const reset = () => setCount(0)
-
-  const handleTextChange = e => setText(e.target.value)
+  function removeNote(id) {
+    setNotes(notes.filter(note => note.id !== id))
+  }
 
   return (
     <div>
-      <p>
-        The current {text || 'count'} is {count}
-      </p>
-      <button onClick={increment}>+1</button>
-      <button onClick={decrement}>-1</button>
-      <button onClick={reset}>0</button>
-      <input value={text} onChange={handleTextChange} />
+      <h1>Notes</h1>
+      {notes.map(note => (
+        <div key={note.id}>
+          <h3>{note.title}</h3>
+          <p>{note.content}</p>
+          <button onClick={() => removeNote(note.id)}>x</button>
+        </div>
+      ))}
+      <p>Add Note:</p>
+      <form id="form" onSubmit={addNote}>
+        <input
+          type="text"
+          value={title}
+          form="form"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <button type="submit">Add Note</button>
+      </form>
+      <textarea
+        cols="50"
+        rows="5"
+        form="form"
+        maxLength="256"
+        wrap="soft"
+        placeholder="Write here"
+        value={content}
+        onChange={e => setContent(e.target.value)}
+      />
     </div>
   )
 }
 
-App.defaultProps = {
-  count: 0
-}
-
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<NoteApp />, document.getElementById('root'))
