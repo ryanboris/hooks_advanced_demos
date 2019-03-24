@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import uuidv4 from 'uuid'
 
 const NoteApp = () => {
-  const notesData = JSON.parse(localStorage.getItem('notes'))
-  const [notes, setNotes] = useState(notesData || [])
+  const [notes, setNotes] = useState([])
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
@@ -27,8 +26,11 @@ const NoteApp = () => {
   }
 
   useEffect(() => {
+    setNotes(JSON.parse(localStorage.getItem('notes')))
+  }, [])
+  useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
-  })
+  }, [notes])
 
   return (
     <div>
