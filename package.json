@@ -5,9 +5,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lax.js": "^1.1.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-scripts": "^2.1.8",
     "styled-components": "^4.2.0",
     "uuid": "^3.3.2"
   },
