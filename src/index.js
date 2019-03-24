@@ -26,8 +26,12 @@ const NoteApp = () => {
   }
 
   useEffect(() => {
-    setNotes(JSON.parse(localStorage.getItem('notes')))
+    const storedNotes = JSON.parse(localStorage.getItem('notes'))
+    if (storedNotes) {
+      setNotes(storedNotes)
+    }
   }, [])
+
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes))
   }, [notes])
