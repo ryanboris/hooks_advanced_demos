@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = props => {
@@ -12,6 +12,10 @@ const App = props => {
   const reset = () => setCount(0)
 
   const handleTextChange = e => setText(e.target.value)
+
+  useEffect(() => {
+    document.title = count
+  })
 
   return (
     <div>
