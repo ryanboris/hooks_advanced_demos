@@ -40,11 +40,7 @@ const NoteApp = () => {
     <div>
       <h1>Notes</h1>
       {notes.map(note => (
-        <div key={note.id}>
-          <h3>{note.title}</h3>
-          <p>{note.content}</p>
-          <button onClick={() => removeNote(note.id)}>x</button>
-        </div>
+        <Note key={note.id} note={note} removeNote={removeNote} />
       ))}
       <p>Add Note:</p>
       <form id="form" onSubmit={addNote}>
@@ -70,4 +66,21 @@ const NoteApp = () => {
   )
 }
 
+const Note = ({ note, removeNote }) => {
+  useEffect(() => {
+    console.log('Note', 'Setting up Note')
+
+    return () => {
+      console.log('cleaning up effect')
+    }
+  }, [])
+
+  return (
+    <div>
+      <h3>{note.title}</h3>
+      <p>{note.content}</p>
+      <button onClick={() => removeNote(note.id)}>x</button>
+    </div>
+  )
+}
 ReactDOM.render(<NoteApp />, document.getElementById('root'))
