@@ -14,8 +14,13 @@ const App = props => {
   const handleTextChange = e => setText(e.target.value)
 
   useEffect(() => {
+    console.log('this should only run once!!!!')
+  }, [])
+
+  useEffect(() => {
+    console.log('the second useEffect runs when the count changes')
     document.title = count
-  })
+  }, [count])
 
   return (
     <div>
