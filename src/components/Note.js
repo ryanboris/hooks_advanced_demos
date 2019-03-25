@@ -6,7 +6,7 @@ const StyledIcon = styled(Icon)`
   cursor: pointer;
 `
 
-const Note = ({ note, removeNote }) => {
+const Note = ({ note, dispatch }) => {
   useEffect(() => {
     console.log('Note', 'Setting up Note')
 
@@ -14,6 +14,10 @@ const Note = ({ note, removeNote }) => {
       console.log('cleaning up effect')
     }
   }, [])
+
+  function removeNote(id) {
+    dispatch({ type: 'DELETE_NOTE', id })
+  }
 
   return (
     <div>

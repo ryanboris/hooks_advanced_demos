@@ -6,10 +6,6 @@ import AddNoteForm from './AddNoteForm'
 const NoteApp = () => {
   const [state, dispatch] = useReducer(notesReducer, { notes: [] })
 
-  function removeNote(id) {
-    dispatch({ type: 'DELETE_NOTE', id })
-  }
-
   useEffect(() => {
     const notes = JSON.parse(localStorage.getItem('notes'))
     if (notes) {
@@ -26,7 +22,7 @@ const NoteApp = () => {
       <h1>Notes</h1>
       <p>Add Note:</p>
       <AddNoteForm dispatch={dispatch} />
-      <NoteList notes={state.notes} removeNote={removeNote} />
+      <NoteList notes={state.notes} dispatch={dispatch} />
     </>
   )
 }
