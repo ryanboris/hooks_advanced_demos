@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import uuidv4 from 'uuid'
 import styled from 'styled-components'
+import NotesContext from '../context/notesContext'
 
 const FormWrapper = styled.form`
   display: flex;
@@ -19,9 +20,10 @@ const FormWrapper = styled.form`
   }
 `
 
-export default function addNote({ dispatch }) {
+export default function addNote() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const { dispatch } = useContext(NotesContext)
 
   function addNote(e) {
     e.preventDefault()

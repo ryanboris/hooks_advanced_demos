@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Icon from '@material-ui/core/Icon'
 import styled from 'styled-components/macro'
-
+import NotesContext from '../context/notesContext'
+import useMousePosition from '../hooks/useMousePosition'
 const StyledIcon = styled(Icon)`
   cursor: pointer;
 `
 
-const Note = ({ note, dispatch }) => {
-  useEffect(() => {
-    console.log('Note', 'Setting up Note')
-
-    return () => {
-      console.log('cleaning up effect')
-    }
-  }, [])
+const Note = ({ note }) => {
+  const { dispatch } = useContext(NotesContext)
+  const position = useMousePosition()
 
   function removeNote(id) {
     dispatch({ type: 'DELETE_NOTE', id })
@@ -24,6 +20,9 @@ const Note = ({ note, dispatch }) => {
       <h3>{note.title}</h3>
       <div>
         <span>{note.content}</span>
+        <p>
+          {position.x}, {position.y}
+        </p>
         <StyledIcon
           fontSize="small"
           onClick={() => removeNote(note.id)}
